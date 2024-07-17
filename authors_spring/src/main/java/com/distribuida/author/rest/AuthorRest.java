@@ -2,66 +2,61 @@ package com.distribuida.author.rest;
 
 import com.distribuida.author.db.Author;
 import com.distribuida.author.repository.AuthorRepository;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Path("/authors")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@ApplicationScoped
-@Transactional
+@RestController
+@RequestMapping("/authors")
 public class AuthorRest {
 
-    @Inject
-    AuthorRepository authorRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
 
-    @GET
+    @GetMapping
     public List<Author> findAll() {
         System.out.println("findAll");
-        return authorRepository.listAll();
+        return authorRepository.findAll();
     }
 
-    @GET
-    @Path("/{id}")
-    public Response findById(@PathParam("id") Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Author> findById(@PathVariable("id") Integer id) {
         System.out.println("findById");
-        var op = authorRepository.findByIdOptional(id);
-        if (op.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        return Response.ok(op.get()).build();
+        return authorRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @POST
-    public Response create(Author author) {
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody Author author) {
         author.setId(null);
-        authorRepository.persist(author);
-        return Response.status(Response.Status.CREATED).build();
+        authorRepository.save(author);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PUT
-    @Path("/{id}")
-    public Response update(@PathParam("id") Integer id, Author author) {
-        Author obj = authorRepository.findById(id);
-
-        obj.setFirstName(author.getFirstName());
-        obj.setLastName(author.getLastName());
-//        obj.setAge(author.getAge());
-
-        return Response.ok().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable("id") Integer id, @RequestBody Author author) {
+        return authorRepository.findById(id)
+                .map(obj -> {
+                    obj.setFirstName(author.getFirstName());
+                    obj.setLastName(author.getLastName());
+                    // obj.setAge(author.getAge());
+                    authorRepository.save(obj);
+                    return ResponseEntity.ok().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") Integer id) {
-        authorRepository.deleteById(id);
-        return Response.ok().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+        if (authorRepository.existsById(id)) {
+            authorRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 }

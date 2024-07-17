@@ -1,11 +1,9 @@
 package com.distribuida.author.repository;
 
 import com.distribuida.author.db.Author;
-import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@ApplicationScoped
-@Transactional
-public class AuthorRepository implements PanacheRepositoryBase<Author, Integer> {
+@Repository
+public interface AuthorRepository extends JpaRepository<Author, Integer> {
 }

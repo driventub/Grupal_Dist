@@ -1,7 +1,6 @@
 package com.distribuida.author.db;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 @Entity
 @Table(name = "author")
