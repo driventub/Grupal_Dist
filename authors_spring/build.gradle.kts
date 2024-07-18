@@ -23,19 +23,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.2")
-    implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.1.2")
+    // implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.2")
+    // implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.1.2")
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    // implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    // implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.postgresql:postgresql")
 
-    implementation("org.projectlombok:lombok:1.18.32")
-    annotationProcessor("org.projectlombok:lombok:1.18.32")
 
-    // For reactive programming (similar to Mutiny in Quarkus)
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    // // For reactive programming (similar to Mutiny in Quarkus)
+    // implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
