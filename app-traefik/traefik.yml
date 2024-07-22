@@ -7,11 +7,12 @@ entrypoints:
     address: ":7070"
 
 providers:
- file:
-   filename: apps.yml
-   watch: true
-  # consulCatalog:
-  #   refreshInterval: 30s
-  #   exposedByDefault: false
-  #   endpoint:
-  #     address: 127.0.0.1:8500
+  file:
+    filename: apps.yml
+    watch: true
+  consulCatalog:
+    # rootkey: "traefik"
+    refreshInterval: 30s
+    exposedByDefault: false
+    endpoint:
+      address: 127.0.0.1:8500

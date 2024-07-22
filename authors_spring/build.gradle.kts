@@ -19,12 +19,17 @@ repositories {
     mavenCentral()
 }
 
+// springCloudVersion = "4.1.2"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     // implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.2")
-    // implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.1.2")
+    implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.1.2")
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
+    // implementation("org.springframework.cloud:spring-cloud-starter-config:4.1.3")
+
 
     // implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     // implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -34,7 +39,14 @@ dependencies {
 
     // // For reactive programming (similar to Mutiny in Quarkus)
     // implementation("org.springframework.boot:spring-boot-starter-webflux")
+    // implementation("io.smallrye.reactive:smallrye-mutiny-vertx-consul-client")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+
+// dependencyManagement {
+//     imports {
+//         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+//     }
+// }
 
