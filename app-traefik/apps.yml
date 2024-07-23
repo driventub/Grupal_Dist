@@ -20,17 +20,17 @@ http:
     service-app-authors:
       loadBalancer:
         servers:
-          - url: 'http://localhost:9090'
+          - url: "http://localhost:9090"
     service-app-books:
       loadBalancer:
         servers:
-          - url: 'http://localhost:8090'
+          - url: "http://localhost:8090"
   middlewares:
     mid-authors:
       stripPrefix:
         prefixes:
-          - '/app-authors'
+          - "/app-authors"
     mid-books:
       stripPrefix:
         prefixes:
-          - '/app-books'
+          - "/app-books"
