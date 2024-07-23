@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: author-service
+  cloud:
+    consul:
+      enabled: true
+      host: ${CONSUL_HOST:consul}
+      port: ${CONSUL_PORT:8500}
+      config:
+        enabled: true
+      discovery:
+        tags:
+          - traefik.enable=true
+          - traefik.http.routers.author-service.rule=PathPrefix(`/app-authors`)
+          - traefik.http.middlewares.author-service-strip.stripprefix.prefixes=/app-authors
+          - traefik.http.routers.author-service.middlewares=author-service-strip
+        instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+        service-name: ${spring.application.name}
+        healthCheckPath: /actuator/health
