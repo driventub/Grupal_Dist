@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     // implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.2")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.1.2")
+    // implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
     // implementation("org.springframework.cloud:spring-cloud-starter-config:4.1.3")
 
