@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -9,8 +10,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/authors_spring" />
-            <option value="$PROJECT_DIR$/ejemplo05_quarkus" />
-            <option value="$PROJECT_DIR$/ejemplo05_quarkus_author" />
+            <option value="$PROJECT_DIR$/books" />
+            <option value="$PROJECT_DIR$/books_spring" />
           </set>
         </option>
       </GradleProjectSettings>
