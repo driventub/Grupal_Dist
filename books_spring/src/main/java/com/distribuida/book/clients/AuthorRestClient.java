@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "app-authors")
 public interface AuthorRestClient {
 
-    @GetMapping("/{id}")
+    @GetMapping("/authors/{id}")
     AutorDto findById(@PathVariable("id") Integer id);
 }

@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dbserver:5432/distribuida
+    username: postgres
+    password: LAOLl203
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  application:
+    name: app-books
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        register: true
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}:${random.value}
+        health-check-interval: 10s
+        tags:
+          - traefik.enable=true
+          - traefik.http.routers.books.rule=PathPrefix(`/app-books`)
+          - traefik.http.middlewares.books-strip.stripprefix.prefixes=/app-books
+          - traefik.http.routers.books.middlewares=books-strip@consulcatalog
+          - traefik.http.services.books.loadbalancer.server.port=8090
+server:
+  port: 8090
